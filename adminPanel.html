@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TechNova Solutions — Home</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="topbar" role="banner">
+    <div class="brand">TechNova Solutions</div>
+    <nav class="nav" aria-label="Primary">
+      <a href="adminPanel.html">Administracion de Usuarios</a>
+      <a href="#">Administración de almacenamiento</a>
+      <a class="nav-logo" href="index.html">
+        <img class="circulo" src="imagenes/logos/user-img.svg" alt="userAdmin" >
+      </a>      
+    </nav>
+  </header>
+
+  <h1>Administración de Usuarios</h1>
+  
+  <div> <br> </div>
+
+  <!-- FORM PARA CREAR USUARIO-->
+<!-- FORM PARA CREAR USUARIO -->
+<div class="form-wrapper">
+  <form class="form-container" id="formUsuarios" onsubmit="return false;">
+    <div class="form-group">
+      <label for="username">Nombre Usuario</label>
+      <input type="text" id="username" placeholder="user">
+    </div>
+
+    <div class="form-group">
+      <label for="ownerName">Propietario</label>
+      <input type="text" id="ownerName" placeholder="owner">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo</label>
+      <input type="email" id="email" placeholder="e-mail">
+    </div>
+
+    <button type="button" id="submit" onclick="agregarUsuario()" class="btn">Crear</button>
+  </form>
+</div>
+
+
+  <div> <br> <br> <br> </div>
+<!--HEADER DE LA TABLA ESTATICO-->
+<div class="center-container">  
+    <table id="tablaUsuarios" class="table">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Propietario</th>
+          <th>Correo</th>
+          <th>Activo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>    
+      <tbody></tbody>
+    </table>
+  </div>
+
+
+<!--script js para dinamismo en tabla-->
+  <script>
+    // Datos dummy tabla
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [
+      { usuario: 'mario.perez', propietario: 'Mario Hernando Pérez Cantor', correo: 'm.hernando@micorreo.com', activo: true },
+      { usuario: 'jorge.elias', propietario: 'Jorge Elias Moreno', correo: 'j.elias1820@micorreo.com', activo: false },
+      { usuario: 'karen.ruiz', propietario: 'Karen Julieth Ruiz Jimenez', correo: 'k.ruiz2220@micorreo.com', activo: false },
+      { usuario: 'marcos.lopez', propietario: 'Marcos E. López Martínez', correo: 'm.lopez@micorreo.com', activo: true }
+    ];
+
+    // Renderiza la tabla vacía y le carga datos
+    function renderTabla() {
+      const tbody = document.querySelector("#tablaUsuarios tbody");
+      tbody.innerHTML = "";
+
+      // Recorre los datos dummy y los carga fila a fila
+      usuarios.forEach((u, index) => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td>${u.usuario}</td>
+          <td>${u.propietario}</td>
+          <td>${u.correo}</td>
+          <td><input type="checkbox" ${u.activo ? "checked" : ""} onchange="toggleActivo(${index})"></td>
+          <td class="actions">
+            <button title="Editar" onclick="editarUsuario(${index})"><img src="imagenes/logos/pen-2.svg" alt="Editar" width="18"></button>
+            <button title="Eliminar" onclick="eliminarUsuario(${index})"><img src="imagenes/logos/bin-delete.svg" alt="Eliminar" width="18"></button>
+            <button title="Más" onclick="verDetalle(${index})"><img src="imagenes/logos/dots-3-horizontal.svg" alt="Más" width="18"></button>
+          </td>
+        `;
+        tbody.appendChild(fila);
+      });
+    }
+
+    // ========= Operaciones CRUD =========
+    function agregarUsuario() {
+
+      if (document.getElementById('submit').textContent !== "Crear"){
+        guardarUsuario();
+        return;
+      }
+      const usuario = document.getElementById('username').value;
+      const propietario = document.getElementById('ownerName').value;
+      const correo = document.getElementById('email').value;
+
+      if (!usuario || !propietario || !correo) 
+      return alert("Todos los campos son requeridos.");
+
+      usuarios.push({ usuario, propietario, correo, activo: true });
+
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+      document.getElementById("username").value = "";
+      document.getElementById("ownerName").value = "";
+      document.getElementById("email").value = "";
+
+      renderTabla();
+    }
+
+    function editarUsuario(index) {
+      const u = usuarios[index];
+    
+        // Cargar los datos en los inputs
+      document.getElementById('username').value = u.usuario;
+      document.getElementById('ownerName').value = u.propietario;
+      document.getElementById('email').value = u.correo;
+    
+      // Guardar el índice actual en un atributo temporal en el formulario
+      document.getElementById('formUsuarios').dataset.editIndex = index;
+    
+      // Cambiar el texto del botón a "Guardar cambios"
+      document.getElementById('submit').textContent = "Guardar cambios";
+    }
+
+    function guardarUsuario() {
+        const username = document.getElementById('username').value;
+        const ownerName = document.getElementById('ownerName').value;
+        const email = document.getElementById('email').value;
+    
+        if (!username || !ownerName || !email) {
+          alert("Todos los campos son obligatorios");
+          return;
+        }
+    
+        const form = document.getElementById('formUsuarios');
+        const editIndex = form.dataset.editIndex;
+    
+        if (editIndex !== undefined) {
+          // Editar usuario existente
+          usuarios[editIndex] = { usuario: username, propietario: ownerName, correo: email, activo: usuarios[editIndex].activo };
+          delete form.dataset.editIndex;
+          document.getElementById('submit').textContent = "Crear"; // volver al modo creación
+        } else {
+          // Crear nuevo usuario
+          usuarios.push({ usuario: username, propietario: ownerName, correo: email, activo: true });
+        }
+    
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        renderTabla();
+        form.reset();
+    }
+
+
+    function eliminarUsuario(index) {
+      if (confirm("¿Seguro que deseas eliminar este usuario?")) {
+        usuarios.splice(index, 1);
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        renderTabla();
+      }
+    }
+
+    function toggleActivo(index) {
+      usuarios[index].activo = !usuarios[index].activo;
+    }
+
+    function verDetalle(index) {
+      const u = usuarios[index];
+      const blob = new Blob([JSON.stringify(u, null, 2)], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "usuarios.json";
+      link.click();      
+    }
+
+    // Inicializa la tabla al cargar la página
+    renderTabla();
+  </script>
+
+  <div> <br> <br> <br> </div>
+
+   <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <h3>TechNova Solutions</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Política De Privacidad</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas</a></li>
+          <li><a href="#">Compras</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Soporte</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 TechNova Solutions · All rights reserved
+    </div>
+  </footer>
+</body>

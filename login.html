@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TechNova Solutions — Login</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+
+<!-- Iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+
+<style>
+/* CONTENIDO + FONDO */
+main.hero{
+  flex: 1;
+  min-height: calc(100vh - 80px);
+  background: url(imagenes/fondobdlogin.jpg) no-repeat fixed;
+  background-size: cover;
+  background-position: center 70%;
+  display: grid;
+  grid-template-columns: minmax(300px,520px) 1fr;
+  margin-bottom: 0;
+}
+</style>
+
+<!-- NAVBAR -->
+  <header class="topbar">
+    <div class="brand">TechNova Solutions</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="#">Contact</a>
+      <a class="btn-outline" href="#">Login</a>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="hero">
+    <section class="left">
+      <div class="stack">
+        <h1>Login Administrator</h1>
+        <form class="card" onsubmit="event.preventDefault();">
+          <label for="email">Email</label>
+          <input id="email" class="input" type="email" placeholder="name@company.com" required>
+
+          <label for="password">Password</label>
+          <input id="password" class="input" type="password" placeholder="••••••••" required>
+
+          <div class="row">
+            <div class="note">Administrator access only</div>
+            <div class="help"><a href="#">Forgot password?</a></div>
+          </div>
+
+          <button class="btn" type="submit">Sign In</button>
+          <div id="status" class="note" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+    <section class="right" aria-hidden="true"></section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <h3>TechNova Solutions</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Política De Privacidad</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas</a></li>
+          <li><a href="#">Compras</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Soporte</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 TechNova Solutions · All rights reserved
+    </div>
+  </footer>
+
+
+<!-- SCRIPT LOGIN -->
+<script>
+  
+  document.querySelector("form").addEventListener("submit", function(event){
+  event.preventDefault(); // evita recargar la página
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  // Validación simple
+  if(email === "" || password === ""){
+    alert("Por favor ingresa usuario y contraseña.");
+    return;
+  }
+
+  // Ejemplo de credenciales permitidas
+  const validUsers = [
+    { email: "laura@technova.com", pass: "12345" },
+    { email: "julian@technova.com", pass: "admin" },
+    { email: "kevin@technova.com", pass: "admin5" }
+
+  ];
+
+  // Buscar si coincide
+  const match = validUsers.find(u => u.email === email && u.pass === password);
+
+  if(match){
+    alert("Bienvenid@ " + email);
+    // Redirigir al panel de administrador
+    window.location.href = "adminPanel.html";
+  } else {
+    alert("Credenciales incorrectas. Intenta nuevamente.");
+  }
+});
+</script>
+
+</body>
+</html>
+

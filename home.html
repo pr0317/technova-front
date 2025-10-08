@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TechNova Solutions — Home</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+<style>
+
+  .hero{
+    background:#fff; background-position: center; background-size: cover; background-repeat: no-repeat;
+    color:#000; text-align:center; padding:35px 16px 28px;
+  }
+  .hero__inner{max-width:1200px; margin:0 auto}
+  .hero h1{font-size:48px; font-weight:800; margin-bottom:10px}
+  .hero p{font-size:20px; font-weight:500}
+
+  /* ===== SLIDER ===== */
+  .slider{ position:relative; margin:22px auto 6px; max-width:800px; overflow:hidden; border-radius:12px }
+  .slides{ display:flex; width:100%; transition:transform .5s ease }
+  .slides img{ width:100%; height:360px; object-fit:cover; flex:0 0 100% }
+
+  .ctrl{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:rgba(0,0,0,.45); color:#fff; border:0; width:40px; height:40px;
+    border-radius:999px; cursor:pointer; font-size:24px; line-height:40px;
+  }
+  .ctrl:hover{ background:rgba(0,0,0,.65) }
+  .prev{ left:10px } .next{ right:10px }
+
+  .dots{ position:absolute; left:0; right:0; bottom:10px; display:flex; gap:8px; justify-content:center }
+  .dots button{
+    width:10px; height:10px; border-radius:50%; border:0; background:rgba(255,255,255,.55); cursor:pointer
+  }
+  .dots button.active{ background:#fff }
+
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px){
+    .hero h1{font-size:36px}
+    .hero p{font-size:18px}
+    .slides img{ height:220px }
+  }
+</style>
+
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="topbar" role="banner">
+    <div class="brand">TechNova Solutions</div>
+    <nav class="nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a class="btn-outline" href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero__inner">
+      <h1>TechNova Solutions</h1>
+      <p>Innovative solutions to drive your business forward</p>
+
+      <!-- SLIDER -->
+      <div class="slider" aria-label="image slider">
+        <div class="slides">
+          <img src="imagenes/cloudinfra.jpg" alt="Cloud and data technology">
+          <img src="imagenes/software.jpg" alt="Hand using laptop with holographic UI">
+          <img src="imagenes/linux.jpg" alt="Network and security visualization">
+        </div>
+
+        <button class="ctrl prev" aria-label="Previous slide">‹</button>
+        <button class="ctrl next" aria-label="Next slide">›</button>
+
+        <div class="dots" role="tablist" aria-label="Slide dots"></div>
+      </div>
+    </div>
+  </section>
+
+
+ <!-- ===== OUR MISSION ===== -->
+ <style>
+  body {
+  background: #fff;
+  color: #333;
+}
+
+ .mission {
+  background: #000;     
+  color: #fff;          
+  padding: 60px 20px;  
+  text-align: center; 
+}
+
+.mission h2 {
+  font-size: 32px;   
+  margin-bottom: 20px;
+}
+
+.mission p {
+  font-size: 18px;  
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 0 auto;  
+}
+ </style>
+
+<section class="mission">
+  <h2>Our Mission</h2>
+  <p>
+    To provide efficient, secure, and customized technological solutions that meet the needs of each client,
+    building trust and contributing to innovation in the business world.
+  </p>
+</section>
+
+ <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <h3>TechNova Solutions</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Política De Privacidad</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas</a></li>
+          <li><a href="#">Compras</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Soporte</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 TechNova Solutions · All rights reserved
+    </div>
+  </footer>
+
+<!-- ===== SLIDER SCRIPT ===== -->
+  <script>
+  (function(){
+    const slider = document.querySelector('.slider');
+    if(!slider) return;
+    const track = slider.querySelector('.slides');
+    const imgs = [...track.children];
+    const prev = slider.querySelector('.prev');
+    const next = slider.querySelector('.next');
+    const dotsWrap = slider.querySelector('.dots');
+
+    let idx = 0, total = imgs.length, timer;
+
+    // Crear dots
+    imgs.forEach((_,i)=>{
+      const b=document.createElement('button');
+      b.setAttribute('aria-label','Go to slide '+(i+1));
+      b.addEventListener('click', ()=>go(i,true));
+      dotsWrap.appendChild(b);
+    });
+
+    function paint(){
+      track.style.transform = `translateX(-${idx*100}%)`;
+      [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active', i===idx));
+    }
+    function go(i, manual){
+      idx = (i+total)%total;
+      paint();
+      if(manual){ resetAuto(); }
+    }
+    function nextSlide(){ go(idx+1); }
+    function resetAuto(){
+      clearInterval(timer);
+      timer = setInterval(nextSlide, 4000); // auto cada 5s
+    }
+
+    prev.addEventListener('click', ()=>go(idx-1,true));
+    next.addEventListener('click', ()=>go(idx+1,true));
+
+    // iniciar
+    paint(); resetAuto();
+
+    // pausar en hover
+    slider.addEventListener('mouseenter', ()=>clearInterval(timer));
+    slider.addEventListener('mouseleave', resetAuto);
+  })();
+  </script>
+
+
+</body>
+</html>
+

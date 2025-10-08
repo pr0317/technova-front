@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TechNova Solutions — Servicios</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+      :root{
+      --bg:#0f1b2b; --panel:#0f243a; --stroke:#1e3b58;
+      --text:#eaf7ff; --muted:#b6c6d6; --accent:#5da9ff;
+      --chip:#152b44; --chipBorder:#234567;
+    }
+
+    *{box-sizing:border-box}
+    html, body{
+      height:100%; margin:0; display:flex; flex-direction:column;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Ubuntu,sans-serif;
+      color:var(--text); background:var(--bg);
+    }
+
+    /* HERO */
+    .hero{
+      background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.35)),
+                 url("imagenes/hero-servicios.jpg") center/cover no-repeat;
+      min-height:280px; display:grid; place-items:center; text-align:center;
+      padding:40px 20px; border-bottom:1px solid #22364f;
+    }
+    .hero h1{font-size:clamp(28px,4vw,40px); margin:0 0 6px}
+    .hero p{margin:0; color:var(--muted)}
+
+    .container{width:min(1200px,92%); margin:0 auto;}
+    .section-title{ text-align:center; margin:34px 0 10px; font-size:24px; letter-spacing:.3px }
+    .section-sub{ text-align:center; color:var(--muted); margin-bottom:24px }
+
+
+    /* GRID DE SERVICIOS */
+    .grid{
+      display:grid; gap:22px;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+    @media (max-width: 920px){ .grid{ grid-template-columns:1fr } }
+
+    .card{
+      display:grid; grid-template-columns: 1fr 1fr; gap:18px;
+      background:var(--panel); border:1px solid var(--stroke); border-radius:16px;
+      padding:16px; align-items:center;
+    }
+    @media (max-width:720px){ .card{ grid-template-columns:1fr } }
+
+    .card h3{margin:0 0 6px; font-size:18px}
+    .card p{margin:0 0 10px; color:var(--muted); line-height:1.4}
+
+    .price{ display:inline-flex; align-items:center; gap:8px; font-weight:700 }
+    .price .tag{ background:var(--chip); border:1px solid var(--chipBorder); padding:6px 10px; border-radius:10px }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      background:var(--accent); border:0; color:#001933; font-weight:700;
+      padding:10px 14px; border-radius:10px; cursor:pointer; text-decoration:none;
+    }
+    .btn:hover{ filter:brightness(1.05) }
+    .btn.ghost{ background:transparent; border:1px solid var(--stroke); color:var(--text) }
+
+
+   /* PLACEHOLDER DE IMAGEN SERVICIOS */
+
+    .thumb img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+
+  }
+ 
+    /* MINI PAGER INFERIOR */
+    .mini-pager{ display:flex; gap:6px; justify-content:center; margin-top:14px }
+    .mini-pager button{ background:#000; border:1px solid #294664; border-radius:8px; padding:6px 10px; color:#9fb3c9 }
+
+  </style>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+  <header class="topbar">
+    <div class="brand">TechNova Solutions</div>
+    <nav class="nav">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+      <a class="btn-outline" href="#">Login</a>
+    </nav>
+  </header>
+
+	
+  <!-- HERO -->
+  <section class="hero" role="banner">
+    <div>
+      <h1>Innovative solutions to drive your business forward</h1>
+    </div>
+  </section>
+
+  <main class="container" id="content">
+    <h2 class="section-title">Our Services</h2>
+
+    <div class="grid">
+      <!-- Servicio 1 -->
+      <article class="card">
+        <div>
+          <h3>Cloud Infrastructure Setup</h3>
+          <p>Implementación de servidores en la nube (AWS, Azure, GCP) con seguridad y automatización.</p>
+          <div class="price"><span class="tag">$500</span></div>
+          <div class="actions">
+            <a class="btn" href="#"><i class="fa-solid fa-circle-info"></i> Ver detalles</a>
+            <a class="btn ghost" href="#"><i class="fa-regular fa-file-lines"></i> Cotizar</a>
+          </div>
+        </div>
+          <div class="thumb">
+             <img src="imagenes/cloudinfra.jpg" alt="Cloud Infrastructure Setup">
+          </div>
+      </article>
+
+      <!-- Servicio 2 -->
+      <article class="card">
+        <div>
+          <h3>Linux Server Administration</h3>
+          <p>Configuración, seguridad y optimización de servidores Linux.</p>
+          <div class="price"><span class="tag">$300</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb">
+        <img src="imagenes/linux.jpg" alt="Linux Server Administration">
+	</div>
+      </article>
+
+      <!-- Servicio 3 -->
+      <article class="card">
+        <div>
+          <h3>Web Application Development</h3>
+          <p>Desarrollo de aplicaciones web personalizadas y escalables.</p>
+          <div class="price"><span class="tag">$800</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb"> 
+         <img src="imagenes/webdeveloment.jpg" alt="Web Development">
+	</div>
+      </article>
+
+      <!-- Servicio 4 -->
+      <article class="card">
+        <div>
+          <h3>Cybersecurity Audit</h3>
+          <p>Análisis de vulnerabilidades y hardening.</p>
+          <div class="price"><span class="tag">$600</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb">
+         <img src="imagenes/security.jpg" alt="Security Audit">
+	</div> 
+      </article>
+
+      <!-- Servicio 5 -->
+      <article class="card">
+        <div>
+          <h3>Network Optimization</h3>
+          <p>Redes seguras y de alto rendimiento.</p>
+          <div class="price"><span class="tag">$350</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb">
+	 <img src="imagenes/network-optimization.jpg" alt="Network Optimization">
+	</div>
+      </article>
+
+      <!-- Servicio 6 -->
+      <article class="card">
+        <div>
+          <h3>Database Management</h3>
+          <p>Instalación, tuning y respaldo de bases de datos SQL/NoSQL.</p>
+          <div class="price"><span class="tag">$300</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb"> 
+	<img src="imagenes/bdservices.jpg" alt="DBManagement">
+	</div>
+      </article>
+
+      <!-- Servicio 7 -->
+      <article class="card">
+        <div>
+          <h3>Technical Support 24/7</h3>
+          <p>Planes de soporte continuo con SLA a medida.</p>
+          <div class="price"><span class="tag">$100</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb"> 
+         <img src="imagenes/7*24.jpg" alt="7/24">
+	</div>
+      </article>
+
+      <!-- Servicio 8 -->
+      <article class="card">
+        <div>
+          <h3>IT Training & Workshops</h3>
+          <p>Capacitación en DevOps, Linux, Cloud y seguridad.</p>
+          <div class="price"><span class="tag">$300</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb"> 
+          <img src="imagenes/training.jpg" alt="Training">
+	 </div>
+      </article>
+
+      <!-- Servicio 9 -->
+      <article class="card">
+        <div>
+          <h3>Custom Software Solutions</h3>
+          <p>Aplicaciones a medida para empresas.</p>
+          <div class="price"><span class="tag">$1000</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb"> 
+        <img src="imagenes/software.jpg" alt="Software">
+	</div>
+      </article>
+
+      <!-- Servicio 10 -->
+      <article class="card">
+        <div>
+          <h3>Backup & Disaster Recovery</h3>
+          <p>Planes de recuperación ante fallos en nube e híbrido.</p>
+          <div class="price"><span class="tag">$450</span></div>
+          <div class="actions">
+            <a class="btn" href="#">Ver detalles</a>
+            <a class="btn ghost" href="#">Cotizar</a>
+          </div>
+        </div>
+        <div class="thumb">
+	<img src="imagenes/backup.jpg" alt="Backup">
+	</div>
+      </article>
+    </div>
+
+    <div class="mini-pager" aria-label="paginación de servicios">
+      <button aria-label="Página anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button aria-label="Siguiente página"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <h3>TechNova Solutions</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Política De Privacidad</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas</a></li>
+          <li><a href="#">Compras</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Soporte</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 TechNova Solutions · All rights reserved
+    </div>
+  </footer>
+</body>
+</html>
+

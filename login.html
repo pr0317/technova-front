@@ -107,6 +107,44 @@ main.hero{
       © 2025 TechNova Solutions · All rights reserved
     </div>
   </footer>
+
+
+<!-- SCRIPT LOGIN -->
+<script>
+  
+  document.querySelector("form").addEventListener("submit", function(event){
+  event.preventDefault(); // evita recargar la página
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  // Validación simple
+  if(email === "" || password === ""){
+    alert("Por favor ingresa usuario y contraseña.");
+    return;
+  }
+
+  // Ejemplo de credenciales permitidas
+  const validUsers = [
+    { email: "laura@technova.com", pass: "12345" },
+    { email: "julian@technova.com", pass: "admin" },
+    { email: "kevin@technova.com", pass: "admin5" }
+
+  ];
+
+  // Buscar si coincide
+  const match = validUsers.find(u => u.email === email && u.pass === password);
+
+  if(match){
+    alert("Bienvenid@ " + email);
+    // Redirigir al panel de administrador
+    window.location.href = "adminPanel.html";
+  } else {
+    alert("Credenciales incorrectas. Intenta nuevamente.");
+  }
+});
+</script>
+
 </body>
 </html>
 
